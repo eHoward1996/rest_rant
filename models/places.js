@@ -10,30 +10,12 @@ const place_schema = new mongoose.Schema({
         type: Number, 
         min: [1673, "Surely not that old..."],
         max: [new Date().getFullYear(), "Can't be in the future!"]
-    }
+    },
+    comments: [ { type: mongoose.Schema.Types.ObjectId, ref: 'comment' } ]
 })
 
 place_schema.methods.showEstablished = function() {
-    return `${this.name}, serving ${this.city}, ${this.state} ${this.cuisines} since ${this.founded}`
+    return `${this.name}, serving ${this.city}, ${this.state} ${this.cuisines} cuisine since ${this.founded}`
 }
 
 module.exports = mongoose.model('place_schema', place_schema)
-
-// DELETE THIS!
-// -------------------
-// module.exports = [
-//     {
-//         name: 'H-Thai-ML',
-//         city: 'Seattle',
-//         state: 'WA',
-//         cuisines: 'Thai, Pan-Asian',
-//         pic: '/images/thai_food.avif'
-//     },
-//     {
-//         name: 'Coding Cat Cafe',
-//         city: 'Phoenix',
-//         state: 'AZ',
-//         cuisines: 'Coffee, Bakery',
-//         pic: '/images/coding_cafe.avif'
-//     }
-// ]
